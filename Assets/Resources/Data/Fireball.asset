@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 114f4324cff94cff8d7a058594d60dcc, type: 3}
+  m_Name: Fireball
+  m_EditorClassIdentifier: 
+  fireballPrefab: {fileID: 62533489911476774, guid: 35e103f71fc6f4267bb8b213c62daa89, type: 3}
+  firePoint: {fileID: 0}
+  fireballSpeed: 20
+  fireballDamage: 20
+  explosionPrefab: {fileID: 2433282508537954060, guid: 6974369a62d0f457b9d7546746561a98, type: 3}
+  decalPrefab: {fileID: 3549540739033305451, guid: dfd033a0d8563414fa06c4dbfdbfeacf, type: 3}
+  shotSound: {fileID: 8300000, guid: b4678928c30cd4c4e8ed27312cae7b90, type: 3}
+  shotTimeout: 0.5
+  manaCost: 20
+  explosionRadius: 4
+  damageableLayer:
+    serializedVersion: 2
+    m_Bits: 6528
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 1089
