@@ -3985,9 +3985,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21205b21fe24347658b2291f58995e87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 6989667731716573219, guid: 113faccf906624703b4dee4ad65e4bce, type: 3}
+  enemy:
+  - {fileID: 6989667731716573219, guid: 113faccf906624703b4dee4ad65e4bce, type: 3}
+  - {fileID: 6989667731716573219, guid: 2d2a3635563c44ad08960ce04d88032c, type: 3}
   spawnArea: {x: -10, y: 10}
-  numberOfEnemies: 2
+  numberOfEnemies: 1
 --- !u!4 &1502063895
 Transform:
   m_ObjectHideFlags: 0

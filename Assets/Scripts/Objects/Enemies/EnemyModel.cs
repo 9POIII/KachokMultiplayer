@@ -71,7 +71,7 @@ namespace Objects.Enemies
 
         private void Die()
         {
-            GetComponent<EnemyController>().Die();
+            GetComponent<BaseEnemy>().Die();
         }
     }
 }
