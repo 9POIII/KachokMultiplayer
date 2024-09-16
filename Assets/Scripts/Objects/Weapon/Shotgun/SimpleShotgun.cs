@@ -155,7 +155,6 @@ namespace Objects.Weapon.Shotgun
             if (reloadSound != null)
             {
                 PlayAudioLocally(reloadSound);
-                //photonView.RPC("PlayAudio", RpcTarget.Others, "reloadSound");
                 photonView.RPC("PlayShotgunAudio", RpcTarget.Others, "reloadSound");
             }
             

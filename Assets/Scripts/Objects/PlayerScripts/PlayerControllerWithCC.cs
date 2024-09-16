@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Interfaces;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Objects.PlayerScripts
 {
@@ -17,6 +19,7 @@ namespace Objects.PlayerScripts
         [SerializeField] private float groundDistance = 0.4f;
         [SerializeField] private LayerMask groundMask;
         [SerializeField] private Camera playerCamera;
+        [SerializeField] private Transform cameraObjectToUpDown;
         [SerializeField] private float cameraSensitivity = 2f;
         [SerializeField] private float slopeForce = 5.0f;
         [SerializeField] private float slopeForceRayLength = 1.5f;
@@ -101,9 +104,6 @@ namespace Objects.PlayerScripts
         {
             if (!_photonView.IsMine) return;
             
-            RotatePlayerRightLeft();
-            RotateCameraUpDown();
-            
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
             if (Input.GetButtonDown("Jump") && isGrounded)
@@ -111,6 +111,14 @@ namespace Objects.PlayerScripts
                 TryJump();
                 AudioSource.PlayClipAtPoint(jumpSound, gameObject.transform.position);
             }
+        }
+
+        private void LateUpdate()
+        {
+            if (!_photonView.IsMine) return;
+            
+            RotatePlayerRightLeft();
+            RotateCameraUpDown();
         }
 
         private void TryJump()
@@ -185,10 +193,10 @@ namespace Objects.PlayerScripts
  
         private void RotateCameraUpDown()
         {
-            _rotationX -= cameraSensitivity * Input.GetAxisRaw("Mouse Y");
-            _rotationX = Mathf.Clamp(_rotationX, -75, 75);
-            playerCamera.transform.eulerAngles = new Vector3(_rotationX, 
-                playerCamera.transform.eulerAngles.y, playerCamera.transform.eulerAngles.z);
+                _rotationX -= cameraSensitivity * Input.GetAxisRaw("Mouse Y");
+                _rotationX = Mathf.Clamp(_rotationX, -75, 75);
+                cameraObjectToUpDown.localEulerAngles = new Vector3(_rotationX, 
+                    cameraObjectToUpDown.localEulerAngles.y, cameraObjectToUpDown.localEulerAngles.z);
         }
         
         private void DisableRendererForLocalPlayer()

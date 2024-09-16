@@ -20,6 +20,8 @@ namespace Objects.Weapon.Pistol
         [SerializeField] private Image reloadProgressImage;
         [SerializeField] private AudioClip reloadSound;
         [SerializeField] private GameObject muzzleFlash;
+        [SerializeField] private float recoilStrength;
+        [SerializeField] private Vector2 recoilDirection;
 
         public int CountOfBulletsInWeapon => countOfBulletsInWeapon;
         public int CountOfBulletsInBackpack => countOfBulletsInBackpack;
@@ -44,6 +46,8 @@ namespace Objects.Weapon.Pistol
             reloadTime = data.reloadTime;
             reloadSound = data.reloadSound;
             muzzleFlash = data.muzzleFlash;
+            recoilStrength = data.recoilStrength;
+            recoilDirection = data.recoilDirection;
             weaponAnimator = GameObject.Find("Pistol").GetComponentInChildren<Animator>();
             
             base.Initialize("Pistol", pistolDamage, true, reloadTime, shotSound, shotTimeout);
@@ -108,9 +112,9 @@ namespace Objects.Weapon.Pistol
                     if (shotSound != null)
                     {
                         PlayAudioLocally(shotSound);
-                        //photonView.RPC("PlayAudio", RpcTarget.Others, "shotSound");
                         photonView.RPC("PlayPistolAudio", RpcTarget.Others, "shotSound");
-                    }
+                    } 
+                    WeaponRecoil.Instance.ApplyRecoil(this);
                 }
                 else
                 {
@@ -118,7 +122,7 @@ namespace Objects.Weapon.Pistol
                 }
             }
         }
-
+        
         private void PlayAudioLocally(AudioClip clip)
         {
             AudioSource source = gameObject.AddComponent<AudioSource>();
@@ -167,7 +171,6 @@ namespace Objects.Weapon.Pistol
             if (reloadSound != null)
             {
                 PlayAudioLocally(reloadSound);
-                //photonView.RPC("PlayAudio", RpcTarget.Others, "reloadSound");
                 photonView.RPC("PlayPistolAudio", RpcTarget.Others, "reloadSound");
             }
             
