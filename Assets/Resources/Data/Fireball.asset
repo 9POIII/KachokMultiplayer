@@ -28,3 +28,4 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 1089
+  recoilProfile: {fileID: 11400000, guid: 05f7b907f496c493299e1d6f88602db8, type: 2}

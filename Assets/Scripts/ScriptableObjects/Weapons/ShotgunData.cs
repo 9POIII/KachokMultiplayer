@@ -18,5 +18,6 @@ namespace ScriptableObjects.Weapons
         public float reloadTime = 2f;
         public AudioClip reloadSound;
         public GameObject muzzleFlash;
+        public RecoilProfile recoilProfile;
     }
 }

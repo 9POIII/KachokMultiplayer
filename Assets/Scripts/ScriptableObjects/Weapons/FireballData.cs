@@ -17,5 +17,6 @@ namespace ScriptableObjects.Weapons
         public float explosionRadius;
         public LayerMask damageableLayer;
         public LayerMask obstacleLayer;
+        public RecoilProfile recoilProfile;
     }
 }

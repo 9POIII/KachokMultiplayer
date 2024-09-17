@@ -1360,8 +1360,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14e30c5968844e879f9f520447883f59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakePosition: {x: -0.125, y: 0.015, z: 0}
-  shakeRotation: {x: 1, y: 0.2, z: 1}
+  positionShake:
+    IsOn: 0
+    Duration: 0
+    Ease: 0
+    RandomnessMode: 0
+    Strength: {x: 0, y: 0, z: 0}
+    Randomness: 0
+    Vibrato: 0
+    Snaping: 0
+  rotationShake:
+    IsOn: 0
+    Duration: 0
+    Ease: 0
+    RandomnessMode: 0
+    Strength: {x: 0, y: 0, z: 0}
+    Randomness: 0
+    Vibrato: 0
+    Snaping: 0
 --- !u!1 &4678415021151654912
 GameObject:
   m_ObjectHideFlags: 0

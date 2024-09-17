@@ -20,6 +20,7 @@ namespace Objects.Weapon.Fireball
         [SerializeField] private float explosionRadius;
         [SerializeField] private LayerMask damageableLayer;
         [SerializeField] private LayerMask obstacleLayer;
+        [SerializeField] private RecoilProfile recoilProfile;
         
         private CharacterModel model;
 
@@ -43,8 +44,9 @@ namespace Objects.Weapon.Fireball
             explosionRadius = data.explosionRadius;
             damageableLayer = data.damageableLayer;
             obstacleLayer = data.obstacleLayer;
+            recoilProfile = data.recoilProfile;
 
-            base.Initialize("Fireball", fireballDamage, false, 0f, shotSound, shotTimeout);
+            base.Initialize("Fireball", fireballDamage, false, 0f, shotSound, shotTimeout, recoilProfile);
             lastShotTime = -shotTimeout;
 
             UpdateFireballAmmo("∞");
@@ -66,6 +68,7 @@ namespace Objects.Weapon.Fireball
                 Rigidbody rb = fireball.GetComponent<Rigidbody>();
                 rb.velocity = firePoint.forward * fireballSpeed;
                 model.SpendMana(manaCost); 
+                WeaponRecoil.Instance.ApplyRecoil();
             }
         }
     }

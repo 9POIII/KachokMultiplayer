@@ -24,3 +24,4 @@ MonoBehaviour:
   reloadTime: 4
   reloadSound: {fileID: 8300000, guid: d28d3ca3cabf244b9930ce86a75b86a2, type: 3}
   muzzleFlash: {fileID: 1134129239631916, guid: 75f8c4d8396184d80b30eb41547918dd, type: 3}
+  recoilProfile: {fileID: 11400000, guid: 05f7b907f496c493299e1d6f88602db8, type: 2}

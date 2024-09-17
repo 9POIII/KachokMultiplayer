@@ -1,5 +1,6 @@
 using System.Collections;
 using Photon.Pun;
+using ScriptableObjects.Weapons;
 using UnityEngine;
 
 namespace Objects.Weapon
@@ -16,9 +17,10 @@ namespace Objects.Weapon
         protected Animator weaponAnimator;
         protected GameObject myModel;
         public bool IsReloading => isReloading;
+        public RecoilProfile RecoilProfile;
 
         public void Initialize(string weaponName, int damage, bool needsReloading, float reloadTime, AudioClip shotSound,
-            float shotTimeout)
+            float shotTimeout, RecoilProfile recoilProfile)
         {
             this.weaponName = weaponName;
             this.damage = damage;
@@ -26,6 +28,7 @@ namespace Objects.Weapon
             this.reloadTime = reloadTime;
             this.shotSound = shotSound;
             this.shotTimeout = shotTimeout;
+            this.RecoilProfile = recoilProfile;
         }
 
         public abstract void Use();

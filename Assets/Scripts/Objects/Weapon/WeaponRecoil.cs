@@ -1,6 +1,7 @@
 using System;
 using System.Xml.Schema;
 using DG.Tweening;
+using ScriptableObjects.Weapons;
 using UnityEngine;
 
 namespace Objects.Weapon
@@ -9,8 +10,8 @@ namespace Objects.Weapon
     {
         public static WeaponRecoil Instance;
 
-        [SerializeField] private Vector3 shakePosition = new Vector3(-0.125f, 0.015f, 0);
-        [SerializeField] private Vector3 shakeRotation = new Vector3(2f, 0.5f,0.5f);
+        [SerializeField] private RecoilProfile.PositionShake positionShake = null;
+        [SerializeField] private RecoilProfile.RotationShake rotationShake = null;
         
         private Camera mainCamera;
 
@@ -24,18 +25,43 @@ namespace Objects.Weapon
             }
         }
 
-        public void ApplyRecoil(Weapon weapon)
+        public void SetRecoilProfile(RecoilProfile profile)
         {
-            mainCamera.transform.
-                DOShakePosition(0.1f, shakePosition, 15, 0f, false,
-                true, ShakeRandomnessMode.Full).
-                SetEase(Ease.Linear).
-                SetLink(mainCamera.transform.gameObject);
+            if (profile == null)
+            {
+                Debug.LogError("RecoilProfile is null");
+                return;
+            }
+    
+            positionShake = profile._PositionShake;
+            rotationShake = profile._RotationShake;
+    
+            if (positionShake == null || rotationShake == null)
+            {
+                Debug.LogError("PositionShake or RotationShake is null in RecoilProfile");
+            }
+        }
 
-            mainCamera.transform.DOShakeRotation(0.1f, shakeRotation, 5, 0f,
-                    true, ShakeRandomnessMode.Harmonic).
-                SetEase(Ease.Linear).
-                SetLink(mainCamera.transform.gameObject);
+        public void ApplyRecoil()
+        {
+            if (positionShake.IsOn)
+            {
+                mainCamera.transform.
+                    DOShakePosition(positionShake.Duration, positionShake.Strength,
+                        positionShake.Vibrato, positionShake.Randomness, positionShake.Snaping, true, 
+                        positionShake.RandomnessMode).
+                    SetEase(positionShake.Ease).
+                    SetLink(mainCamera.transform.gameObject);
+            }
+
+            if (rotationShake.IsOn)
+            {
+                mainCamera.transform.DOShakeRotation(rotationShake.Duration, rotationShake.Strength, rotationShake.Vibrato,
+                        rotationShake.Randomness,
+                        true, rotationShake.RandomnessMode).
+                    SetEase(rotationShake.Ease).
+                    SetLink(mainCamera.transform.gameObject);
+            }
         }
     }
 }

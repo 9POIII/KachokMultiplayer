@@ -16,8 +16,6 @@ namespace ScriptableObjects.Weapons
         public float reloadTime = 2f;
         public AudioClip reloadSound;
         public GameObject muzzleFlash;
-        public float recoilStrength = 1.0f;
-        public Vector2 recoilDirection = new Vector2(0, 1);
-
+        public RecoilProfile recoilProfile;
     }
 }

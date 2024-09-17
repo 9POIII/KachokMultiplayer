@@ -20,8 +20,7 @@ namespace Objects.Weapon.Pistol
         [SerializeField] private Image reloadProgressImage;
         [SerializeField] private AudioClip reloadSound;
         [SerializeField] private GameObject muzzleFlash;
-        [SerializeField] private float recoilStrength;
-        [SerializeField] private Vector2 recoilDirection;
+        [SerializeField] private RecoilProfile recoilProfile;
 
         public int CountOfBulletsInWeapon => countOfBulletsInWeapon;
         public int CountOfBulletsInBackpack => countOfBulletsInBackpack;
@@ -46,11 +45,10 @@ namespace Objects.Weapon.Pistol
             reloadTime = data.reloadTime;
             reloadSound = data.reloadSound;
             muzzleFlash = data.muzzleFlash;
-            recoilStrength = data.recoilStrength;
-            recoilDirection = data.recoilDirection;
+            recoilProfile = data.recoilProfile;
             weaponAnimator = GameObject.Find("Pistol").GetComponentInChildren<Animator>();
             
-            base.Initialize("Pistol", pistolDamage, true, reloadTime, shotSound, shotTimeout);
+            base.Initialize("Pistol", pistolDamage, true, reloadTime, shotSound, shotTimeout, recoilProfile);
             countOfBulletsInWeapon = bullets;
             countOfBulletsInBackpack = bulletsInBackpack;
             lastShotTime = -shotTimeout;
@@ -114,7 +112,7 @@ namespace Objects.Weapon.Pistol
                         PlayAudioLocally(shotSound);
                         photonView.RPC("PlayPistolAudio", RpcTarget.Others, "shotSound");
                     } 
-                    WeaponRecoil.Instance.ApplyRecoil(this);
+                    WeaponRecoil.Instance.ApplyRecoil();
                 }
                 else
                 {

@@ -109,6 +109,8 @@ namespace Objects.Weapon
                     weapons[i].enabled = (i == currentWeaponIndex);
                 }
             }
+            Debug.Log(weapons[currentWeaponIndex].RecoilProfile);
+            WeaponRecoil.Instance.SetRecoilProfile(weapons[currentWeaponIndex].RecoilProfile);
         }
 
         void UpdateActiveWeapon()
